@@ -35,8 +35,8 @@ bit=`uname -m`
 installbbr(){
 	#Install GCC
 	apt-get update
-	apt-get install build-essential
-	apt-get install make gcc-4.9
+	apt-get install build-essential -y
+	apt-get install make gcc-4.9 -y
 
 
 	#Download Kernel V4.10
