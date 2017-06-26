@@ -96,6 +96,9 @@ startbbr(){
 	echo "obj-m:=tcp_tsunami.o" > Makefile
 	make -C /lib/modules/$(uname -r)/build M=`pwd` modules CC=/usr/bin/gcc-4.9
 	insmod tcp_tsunami.ko
+    	cp -rf ./tcp_tsunami.ko /lib/modules/$(uname -r)/kernel/net/ipv4
+    	depmod -a
+    	modprobe tcp_tsunami
 	rm -rf /etc/sysctl.conf
 	wget -O /etc/sysctl.conf -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/YankeeBBR/master/sysctl.conf
 	sysctl -p
