@@ -44,11 +44,11 @@ installbbr(){
 	dpkg -i headers-all.deb
 
 	if [[ ${bit} == "i386" ]]; then
-		wget -O headers.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-headers-4.10.15-041015-generic_4.10.15-041015.201705080411_i386.deb
-		wget -O image.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-image-4.10.15-041015-generic_4.10.15-041015.201705080411_i386.deb
+		wget --no-check-certificate -O headers.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-headers-4.10.15-041015-generic_4.10.15-041015.201705080411_i386.deb
+		wget --no-check-certificate -O image.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-image-4.10.15-041015-generic_4.10.15-041015.201705080411_i386.deb
 	elif [[ ${bit} == "x86_64" ]]; then
-		wget -O headers.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-headers-4.10.15-041015-generic_4.10.15-041015.201705080411_amd64.deb
-		wget -O image.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-image-4.10.15-041015-generic_4.10.15-041015.201705080411_amd64.deb
+		wget --no-check-certificate -O headers.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-headers-4.10.15-041015-generic_4.10.15-041015.201705080411_amd64.deb
+		wget --no-check-certificate -O image.deb http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.15/linux-image-4.10.15-041015-generic_4.10.15-041015.201705080411_amd64.deb
 	else
 			echo -e "不支持 ${bit} !" && exit 1
 	fi
@@ -93,7 +93,7 @@ installbbr(){
 
 startbbr(){
     mkdir -p $dir/tsunami && cd $dir/tsunami
-	wget -O ./tcp_tsunami.c https://gist.github.com/anonymous/ba338038e799eafbba173215153a7f3a/raw/55ff1e45c97b46f12261e07ca07633a9922ad55d/tcp_tsunami.c
+	wget --no-check-certificate -O ./tcp_tsunami.c https://gist.github.com/anonymous/ba338038e799eafbba173215153a7f3a/raw/55ff1e45c97b46f12261e07ca07633a9922ad55d/tcp_tsunami.c
 	echo "obj-m:=tcp_tsunami.o" > Makefile
 	make -C /lib/modules/$(uname -r)/build M=`pwd` modules CC=/usr/bin/gcc-4.9
 	insmod tcp_tsunami.ko
